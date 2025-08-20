@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gouvernance NFT – Secret/Stashh</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- SecretJS UMD (expose window.secretjs) -->
+  <script src="https://cdn.jsdelivr.net/npm/secretjs@latest" defer></script>
+  <!-- Notre app -->
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>🛡️ Gouvernance NFT</h1>
+      <div class="env-note">Réseau : Secret Network (secret-4)</div>
+    </header>
+
+    <!-- Section Connexion -->
+    <section class="card" id="walletSection">
+      <h2>Connexion</h2>
+      <p id="keplrWarn" class="warn hidden">
+        Keplr n'a pas été détecté. Si vous êtes dans un iframe (Odoo), cliquez&nbsp;:
+        <a id="openNewTab" target="_blank" rel="noopener">ouvrir dans un nouvel onglet</a>.
+      </p>
+      <button id="connectBtn" class="btn primary">Se connecter avec Keplr</button>
+      <div id="walletAddress" class="muted"></div>
+    </section>
+
+    <!-- Section Viewing Keys & Check -->
+    <section class="card hidden" id="vkSection">
+      <h2>Accès par NFT autorisé</h2>
+      <p class="muted">Renseignez vos <strong>viewing keys</strong> pour chaque collection SNIP-721.</p>
+      <div id="collectionsList" class="list"></div>
+      <button id="checkNftBtn" class="btn">Vérifier mon accès NFT</button>
+      <div id="nftMessage" class="muted mt8"></div>
+    </section>
+
+    <!-- Section Gouvernance -->
+    <section class="card hidden" id="govSection">
+      <h2>📢 Créer une proposition</h2>
+      <div class="form">
+        <input id="titleInput" class="input" placeholder="Titre" />
+        <textarea id="descInput" class="textarea" placeholder="Description"></textarea>
+        <button id="addProposalBtn" class="btn">Ajouter</button>
+      </div>
+      <div class="actions">
+        <button id="exportBtn" class="btn ghost">Exporter JSON</button>
+        <span class="muted">Les données sont stockées dans votre navigateur (localStorage).</span>
+      </div>
+    </section>
+
+    <!-- Liste des propositions -->
+    <section class="card hidden" id="listSection">
+      <h2>🗳️ Propositions</h2>
+      <div id="proposals" class="list"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Astuce : si Odoo empêche Keplr dans l’iframe, utilisez le bouton “ouvrir dans un nouvel onglet”.</span>
+  </footer>
+</body>
+</html>
 
