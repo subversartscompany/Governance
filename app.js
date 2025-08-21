@@ -1,48 +1,61 @@
-<!DOCTYPE html>
-</div>
-</div>
-<div class="actions">
-<button id="exportBtn" class="btn ghost">Exporter les propositions (JSON)</button>
-<button id="refreshBtn" class="btn ghost">Rafraîchir l'état</button>
-</div>
-</section>
+<script>
+const rows = [
+["Oui", yes],["Non", no],["Abstention", abstain],["Non avec véto", veto],
+["Participants", participants],["Base quorum", totalVotingPower],["Quorum atteint", r.quorumReached?"Oui":"Non"],
+["% Oui (participants)", (r.yesPct*100).toFixed(1)+"%"],["% Veto (participants)", (r.vetoPct*100).toFixed(1)+"%"],
+];
+const parts = rows.map(([k,v])=>`<div class="row"><div class="col label">${k}</div><div class="col">${v}</div></div>`).join("");
+return `<div class="mt8 muted">${parts}</div>`;
+}
 
 
-<!-- Propositions -->
-<section class="card" id="propsSection">
-<h2>🗳️ Propositions</h2>
-<div class="tabs">
-<button class="tab active" data-tab="active">Actives</button>
-<button class="tab" data-tab="history">Historique</button>
-</div>
-<div id="propsActive" class="list"></div>
-<div id="propsHistory" class="list hidden"></div>
-</section>
+function badgeClass(r){
+if(!r) return "";
+if(!r.quorumReached) return "badge-warn";
+if(r.vetoPct >= GOV.vetoPct) return "badge-danger";
+if(r.yesPct > GOV.passPct) return "badge-pass";
+return "badge-fail";
+}
+function badgeText(r){
+if(!r) return "";
+if(!r.quorumReached) return "Échec (pas de quorum)";
+if(r.vetoPct >= GOV.vetoPct) return "Rejeté (véto)";
+if(r.yesPct > GOV.passPct) return "Adoptée";
+return "Rejetée";
+}
 
 
-<!-- Admin (facultatif) -->
-<section class="card hidden" id="adminSection">
-<h2>⚙️ Paramètres (Admin)</h2>
-<div class="grid2">
-<div>
-<label class="label">Base membres (pour quorum)</label>
-<input id="membersBase" class="input" type="number" min="0" />
-</div>
-<div>
-<label class="label">Adresse Owner (Admin)</label>
-<input id="ownerAddr" class="input" />
-</div>
-</div>
-<div class="row">
-<button id="saveAdminBtn" class="btn">Enregistrer</button>
-<span class="muted tiny">Le quorum est calculé sur cette base en l'absence de registre complet on-chain.</span>
-</div>
-</section>
-</main>
+function exportJSON(){
+const blob = new Blob([JSON.stringify({ proposals, roster: Array.from(roster), admin }, null, 2)], { type: "application/json" });
+const url = URL.createObjectURL(blob); const a=document.createElement("a"); a.href=url; a.download="subversarts_gov_export.json"; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+}
 
 
-<footer class="footer">
-<span>Règles : Quorum 40% • Seuil Oui 50% • Veto 33,4% • Période 14 jours • Droits retirés au proposeur en cas de rejet par véto.</span>
-</footer>
-</body>
-</html>
+function setupTabs(){
+const tabs = document.querySelectorAll('.tab');
+tabs.forEach(t=> t.onclick = () => {
+tabs.forEach(x=>x.classList.remove('active'));
+t.classList.add('active');
+const tab = t.getAttribute('data-tab');
+byId('propsActive').classList.toggle('hidden', tab!=="active");
+byId('propsHistory').classList.toggle('hidden', tab!=="history");
+});
+}
+
+
+function refreshAdminUI(){
+byId('membersBase').value = admin.membersBase||0;
+byId('ownerAddr').value = admin.owner||"";
+}
+
+
+function saveAdmin(){
+admin.membersBase = parseInt(byId('membersBase').value||"0",10) || 0;
+admin.owner = (byId('ownerAddr').value||"").trim();
+save(LS.admin, admin); flash("Paramètres admin enregistrés.");
+if(isOwner()) byId("adminSection").classList.remove("hidden");
+}
+
+
+function escapeHtml(s){ return (s||"").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c])); }
+</script>
