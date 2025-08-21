@@ -1,58 +1,46 @@
-<style>
-:root {
---bg: #0f0f12; --card: #17171b; --border: #2a2a31; --text: #f6f6f7; --muted: #a9abb3;
---accent: #7c6cff; --accent-2: #00d0b3; --danger: #ff5678; --warn: #ffd479;
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0; padding: 0;
+  background: #121212;
+  color: #eee;
 }
-* { box-sizing: border-box; }
-html, body { margin:0; padding:0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-.container { max-width: 980px; margin: 24px auto; padding: 0 16px; }
-.header { margin-bottom: 16px; }
-.header h1 { margin: 0 0 6px 0; font-size: 28px; font-weight: 700; }
-.env-note { color: var(--muted); font-size: 13px; }
 
+header {
+  background: #1e1e1e;
+  padding: 1rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid #333;
+}
 
-.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin: 14px 0; }
-.form { display: grid; gap: 10px; }
-.input, .textarea { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: #0d0d10; color: var(--text); }
-.textarea { min-height: 110px; resize: vertical; }
-.btn { appearance: none; border: 1px solid var(--border); background: #1e1e25; color: var(--text); padding: 8px 12px; border-radius: 10px; cursor: pointer; }
-.btn:hover { border-color: #3a3a48; }
-.btn.primary { background: var(--accent); border-color: transparent; }
-.btn.ghost { background: transparent; }
-.btn.active { outline: 2px solid var(--accent-2); }
-.row { display: flex; gap: 10px; align-items: center; }
-.row.wrap { flex-wrap: wrap; }
-.col { display: flex; flex-direction: column; gap: 4px; }
-.col.grow { flex: 1; }
-.label { font-weight: 600; }
-.list { display: grid; gap: 12px; }
-.item { border: 1px dashed var(--border); padding: 12px; border-radius: 12px; }
-.item-title { font-weight: 700; margin-bottom: 6px; font-size: 18px; }
-.item-desc { color: var(--muted); margin: 8px 0; }
-.item-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.muted { color: var(--muted); }
-.small { font-size: 14px; }
-.tiny { font-size: 12px; }
-.mt8 { margin-top: 8px; }
-.warn { color: var(--warn); }
+h1 { margin: 0; font-size: 1.5rem; }
+button {
+  background: #3a86ff;
+  color: white; border: none;
+  padding: 0.5rem 1rem; border-radius: 8px;
+  cursor: pointer; transition: 0.2s;
+}
+button:hover { background: #265dcc; }
+
+input, textarea {
+  width: 100%; margin: 0.3rem 0; padding: 0.5rem;
+  border-radius: 6px; border: none; background: #1e1e1e; color: white;
+}
+
+.tabs { display: flex; margin-top: 1rem; }
+.tab {
+  flex: 1; text-align: center; padding: 0.5rem;
+  background: #222; cursor: pointer;
+}
+.tab.active { background: #3a86ff; }
+
+.proposal {
+  background: #1e1e1e; padding: 1rem; margin: 1rem 0;
+  border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.badge-pass { background: #06d6a0; padding: 4px 8px; border-radius: 8px; }
+.badge-fail { background: #ef476f; padding: 4px 8px; border-radius: 8px; }
+.badge-warn { background: #ffd166; padding: 4px 8px; border-radius: 8px; color: black; }
+.badge-danger { background: #ff0000; padding: 4px 8px; border-radius: 8px; }
+
 .hidden { display: none; }
-.footer { text-align: center; padding: 20px; color: var(--muted); font-size: 12px; }
-
-
-/* Tabs */
-.tabs { display:flex; gap:8px; margin-bottom: 8px; }
-.tab { background: #121217; border:1px solid var(--border); color: var(--text); padding:6px 10px; border-radius: 8px; cursor:pointer; }
-.tab.active { outline: 2px solid var(--accent); }
-
-
-/* Badges */
-.badge { padding: 4px 8px; border-radius: 999px; font-size: 12px; border: 1px solid var(--border); }
-.badge-pass { background: #10391f; border-color: #1e6f3b; }
-.badge-fail { background: #3a151a; border-color: #7a2b38; }
-.badge-warn { background: #3b3618; border-color: #6f6220; }
-.badge-danger { background: #4b131b; border-color: #93283a; }
-
-
-.flash { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
-background: #22222a; border:1px solid var(--border); color: var(--text); padding:10px 14px; border-radius: 10px; }
-</style>
