@@ -1,66 +1,85 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gouvernance NFT – Secret/Stashh</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- SecretJS UMD (expose window.secretjs) -->
-  <script src="https://cdn.jsdelivr.net/npm/secretjs@latest" defer></script>
-  <!-- Notre app -->
-  <script src="app.js" defer></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SubversArts – Gouvernance NFT</title>
+<link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/secretjs@latest" defer></script>
+<script src="app.js" defer></script>
 </head>
 <body>
-  <main class="container">
-    <header class="header">
-      <h1>🛡️ Gouvernance NFT</h1>
-      <div class="env-note">Réseau : Secret Network (secret-4)</div>
-    </header>
+<main class="container">
+<header class="header">
+<h1>🛡️ SubversArts – Gouvernance NFT</h1>
+<div class="env-note">Réseau : Secret Network (secret-4) • Vote : 14 jours • Quorum 40% • Seuil Oui 50% • Veto 33,4%</div>
+</header>
 
-    <!-- Section Connexion -->
-    <section class="card" id="walletSection">
-      <h2>Connexion</h2>
-      <p id="keplrWarn" class="warn hidden">
-        Keplr n'a pas été détecté. Si vous êtes dans un iframe (Odoo), cliquez&nbsp;:
-        <a id="openNewTab" target="_blank" rel="noopener">ouvrir dans un nouvel onglet</a>.
-      </p>
-      <button id="connectBtn" class="btn primary">Se connecter avec Keplr</button>
-      <div id="walletAddress" class="muted"></div>
-    </section>
 
-    <!-- Section Viewing Keys & Check -->
-    <section class="card hidden" id="vkSection">
-      <h2>Accès par NFT autorisé</h2>
-      <p class="muted">Renseignez vos <strong>viewing keys</strong> pour chaque collection SNIP-721.</p>
-      <div id="collectionsList" class="list"></div>
-      <button id="checkNftBtn" class="btn">Vérifier mon accès NFT</button>
-      <div id="nftMessage" class="muted mt8"></div>
-    </section>
+<!-- Connexion -->
+<section class="card" id="walletSection">
+<h2>Connexion</h2>
+<p id="keplrWarn" class="warn hidden">
+Keplr n'a pas été détecté. Si vous êtes dans une iframe (Odoo),
+<a id="openNewTab" target="_blank" rel="noopener">ouvrez la dApp dans un nouvel onglet</a>.
+</p>
+<div class="row">
+<button id="connectBtn" class="btn primary">Se connecter avec Keplr</button>
+<button id="visitorBtn" class="btn ghost">Entrer en visiteur (lecture seule)</button>
+</div>
+<div id="walletAddress" class="muted"></div>
+</section>
 
-    <!-- Section Gouvernance -->
-    <section class="card hidden" id="govSection">
-      <h2>📢 Créer une proposition</h2>
-      <div class="form">
-        <input id="titleInput" class="input" placeholder="Titre" />
-        <textarea id="descInput" class="textarea" placeholder="Description"></textarea>
-        <button id="addProposalBtn" class="btn">Ajouter</button>
-      </div>
-      <div class="actions">
-        <button id="exportBtn" class="btn ghost">Exporter JSON</button>
-        <span class="muted">Les données sont stockées dans votre navigateur (localStorage).</span>
-      </div>
-    </section>
 
-    <!-- Liste des propositions -->
-    <section class="card hidden" id="listSection">
-      <h2>🗳️ Propositions</h2>
-      <div id="proposals" class="list"></div>
-    </section>
-  </main>
+<!-- Viewing Keys -->
+<section class="card hidden" id="vkSection">
+<h2>Clés de visualisation (Viewing Keys)</h2>
+<p class="muted">
+Créez ou enregistrez une viewing key pour chaque collection SNIP-721 (Stashh) listée ci-dessous.
+Un (1) NFT permissif minimum est requis pour les droits de proposition et de vote.
+</p>
+<div id="collectionsList" class="list"></div>
+<div class="row">
+<button id="checkNftBtn" class="btn">Vérifier mon accès NFT</button>
+<div id="nftMessage" class="muted"></div>
+</div>
+</section>
 
-  <footer class="footer">
-    <span>Astuce : si Odoo empêche Keplr dans l’iframe, utilisez le bouton “ouvrir dans un nouvel onglet”.</span>
-  </footer>
-</body>
+
+<!-- Gouvernance (réservé aux détenteurs NFT permissifs) -->
+<section class="card hidden" id="govSection">
+<h2>📢 Nouvelle proposition</h2>
+<p class="muted">Composition : <strong>Titre</strong>, <strong>Résumé</strong>, <strong>Montant</strong>.</p>
+<div class="form">
+<input id="propTitle" class="input" placeholder="Titre" />
+<textarea id="propSummary" class="textarea" placeholder="Résumé détaillé"></textarea>
+<input id="propAmount" class="input" type="number" min="0" step="0.01" placeholder="Montant demandé (ex : 1000)" />
+<div class="row">
+<button id="createProposalBtn" class="btn">Rédiger & publier (14 jours)</button>
+<span class="muted tiny">Les votes sont modifiables jusqu'à l'échéance.</span>
+</div>
+</div>
+<div class="actions">
+<button id="exportBtn" class="btn ghost">Exporter les propositions (JSON)</button>
+<button id="refreshBtn" class="btn ghost">Rafraîchir l'état</button>
+</div>
+</section>
+
+
+<!-- Propositions -->
+<section class="card" id="propsSection">
+<h2>🗳️ Propositions</h2>
+<div class="tabs">
+<button class="tab active" data-tab="active">Actives</button>
+<button class="tab" data-tab="history">Historique</button>
+</div>
+<div id="propsActive" class="list"></div>
+<div id="propsHistory" class="list hidden"></div>
+</section>
+
+
+<!-- Admin (facultatif) -->
+<section class="card hidden" id="adminSection">
+<h2>⚙️ Paramètres (Admin)</h2>
+<div class="grid2">
 </html>
-
