@@ -1,1 +1,9 @@
 
+{
+  "owner": "secret1xyz...",
+  "minNftRequired": 1,
+  "votingPeriodDays": 14,
+  "quorum": 0.4,
+  "threshold": 0.5,
+  "vetoThreshold": 0.334
+}
