@@ -67,13 +67,12 @@ async function connectKeplr() {
     const offlineSigner = window.getOfflineSignerOnlyAmino(CHAIN_ID);
     const [{ address: myAddr }] = await offlineSigner.getAccounts();
 
-    snClient = await secretjs.SecretNetworkClient.create({
-      chainId: CHAIN_ID,
-      url: LCD_ENDPOINT,
-      wallet: offlineSigner,
-      walletAddress: myAddr,
-      encryptionUtils: window.getEnigmaUtils ? window.getEnigmaUtils(CHAIN_ID) : undefined,
-    });
+    const client = new secretjs.SecretNetworkClient({
+  chainId: CHAIN_ID,
+  url: LCD_ENDPOINT,
+  wallet: offlineSigner,
+  walletAddress: address,
+});
 
     address = myAddr;
     byId("walletAddress").textContent = `Connecté : ${short(address, 8)}`;
