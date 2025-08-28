@@ -1,46 +1,63 @@
 body {
-  font-family: 'Inter', sans-serif;
-  margin: 0; padding: 0;
-  background: #121212;
-  color: #eee;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f6f8;
+  color: #222;
 }
 
 header {
-  background: #1e1e1e;
-  padding: 1rem;
-  display: flex; justify-content: space-between; align-items: center;
-  border-bottom: 1px solid #333;
+  background: #2d3748;
+  color: #fff;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-h1 { margin: 0; font-size: 1.5rem; }
+h1, h2, h3 {
+  margin: 0.5em 0;
+}
+
 button {
-  background: #3a86ff;
-  color: white; border: none;
-  padding: 0.5rem 1rem; border-radius: 8px;
-  cursor: pointer; transition: 0.2s;
+  background: #3182ce;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  margin: 0.25em;
+  border-radius: 6px;
+  cursor: pointer;
 }
-button:hover { background: #265dcc; }
-
-input, textarea {
-  width: 100%; margin: 0.3rem 0; padding: 0.5rem;
-  border-radius: 6px; border: none; background: #1e1e1e; color: white;
-}
-
-.tabs { display: flex; margin-top: 1rem; }
-.tab {
-  flex: 1; text-align: center; padding: 0.5rem;
-  background: #222; cursor: pointer;
-}
-.tab.active { background: #3a86ff; }
+button:hover { background: #2b6cb0; }
 
 .proposal {
-  background: #1e1e1e; padding: 1rem; margin: 1rem 0;
-  border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  background: #fff;
+  padding: 1em;
+  margin: 0.5em 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.badge-pass { background: #06d6a0; padding: 4px 8px; border-radius: 8px; }
-.badge-fail { background: #ef476f; padding: 4px 8px; border-radius: 8px; }
-.badge-warn { background: #ffd166; padding: 4px 8px; border-radius: 8px; color: black; }
-.badge-danger { background: #ff0000; padding: 4px 8px; border-radius: 8px; }
+.tabs {
+  display: flex;
+  margin: 1em 0;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 0.5em;
+  cursor: pointer;
+  background: #e2e8f0;
+}
+.tab.active {
+  background: #3182ce;
+  color: #fff;
+  font-weight: bold;
+}
 
 .hidden { display: none; }
+
+.badge-pass { color: green; font-weight: bold; }
+.badge-fail { color: red; font-weight: bold; }
+.badge-warn { color: orange; font-weight: bold; }
+.badge-danger { color: darkred; font-weight: bold; }
