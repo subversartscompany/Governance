@@ -54,7 +54,7 @@ async function checkPermissiveRights() {
     return;
   }
 //Fin Ajout 
-async function checkPermissiveRights() {
+and async function checkPermissiveRights() {
   USER.isPermissive = false;
 
   for (let col of COLLECTIONS) {
