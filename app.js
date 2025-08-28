@@ -41,9 +41,9 @@ let admin = { owner: "", membersBase: 0 };
 async function loadConfigs(){
   try{
     const [govRes, colRes, memRes] = await Promise.all([
-      fetch("config/governance.json"),
-      fetch("config/collections.json"),
-      fetch("config/members.json")
+      fetch("/config/governance.json"),
+      fetch("/config/collections.json"),
+      fetch("/config/members.json")
     ]);
     const gov = await govRes.json();
     const col = await colRes.json();
