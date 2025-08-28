@@ -1,0 +1,6 @@
+{
+  "votingPeriodDays": 14,
+  "quorumPct": 0.4,
+  "passPct": 0.5,
+  "vetoPct": 0.334
+}
