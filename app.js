@@ -43,6 +43,17 @@ async function createViewingKey(contractAddr) {
 }
 
 // Vérifier droits NFT
+//Ajout 
+async function checkPermissiveRights() {
+  // Vérifier si l'adresse connectée est ton adresse autorisée
+  if (USER.address === "secret1n7n08wrrn6m7nnnnf7v3wfu9trnjnga69zdq9l") {
+    USER.isPermissive = true;
+    USER.banned = false;
+    document.getElementById("governanceSection").style.display = "block";
+    console.log("✅ Adresse admin reconnue, droits permissifs activés.");
+    return;
+  }
+//Fin Ajout 
 async function checkPermissiveRights() {
   USER.isPermissive = false;
 
