@@ -43,9 +43,8 @@ async function createViewingKey(contractAddr) {
 }
 
 // Vérifier droits NFT
-//Ajout 
 async function checkPermissiveRights() {
-  // Vérifier si l'adresse connectée est ton adresse autorisée
+  // 🚀 Adresse admin autorisée en permanence
   if (USER.address === "secret1n7n08wrrn6m7nnnnf7v3wfu9trnjnga69zdq9l") {
     USER.isPermissive = true;
     USER.banned = false;
@@ -53,18 +52,25 @@ async function checkPermissiveRights() {
     console.log("✅ Adresse admin reconnue, droits permissifs activés.");
     return;
   }
-//Fin Ajout 
-and async function checkPermissiveRights() {
+
+  // Vérification des NFT permissifs pour les autres utilisateurs
   USER.isPermissive = false;
 
   for (let col of COLLECTIONS) {
     const vk = USER.viewingKeys[col.contract];
     if (!vk) continue;
-    // Simu: 50% chance
+
+    // Ici tu devrais interroger le contrat SNIP-721 pour vérifier les IDs
+    // Pour démo, on simule avec un random bool
     const hasNft = Math.random() > 0.5;
-    if (hasNft) { USER.isPermissive = true; break; }
+
+    if (hasNft) {
+      USER.isPermissive = true;
+      break;
+    }
   }
 
+  // Affichage ou masquage de la section gouvernance
   if (USER.isPermissive && !USER.banned) {
     document.getElementById("governanceSection").style.display = "block";
   } else {
