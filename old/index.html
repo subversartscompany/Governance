@@ -1,4 +1,4 @@
-// /pages/index.js
+// /src/pages/index.js
 import React, { useState } from 'react';
 import { KeplrConnectButton } from '../components/KeplrConnectButton';
 import UserNFTs from '../components/UserNFTs';
@@ -11,16 +11,18 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      <header className="text-center py-12">
+    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
+      <div className="text-center">
         <h1 className="text-4xl font-bold mb-4">Bienvenue sur la plateforme de gouvernance</h1>
         <p className="text-lg mb-8">Connectez-vous via Keplr pour accéder à vos privilèges exclusifs</p>
+        
+        {/* Affichage conditionnel : si l'utilisateur est connecté, on affiche les NFTs et privilèges */}
         {userAddress ? (
           <UserNFTs userAddress={userAddress} />
         ) : (
           <KeplrConnectButton onAddressUpdate={handleAddressUpdate} />
         )}
-      </header>
+      </div>
     </div>
   );
 };
