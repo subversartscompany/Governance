@@ -1,3 +1,9 @@
+// /config/collections/collection.json
+{
+  "id": "VIP",
+  "name": "VIP NFT",
+  "description": "NFT offrant un accès VIP aux fonctionnalités exclusives."
+}
 {
   "collections": [
     {
