@@ -1,66 +1,28 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DAO Gouvernance</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header>
-    <h1>DAO Gouvernance avec NFT permissifs</h1>
-    <button id="btnConnect">🔑 Se connecter avec Keplr</button>
-    <span id="userAddress"></span>
-  </header>
+// /pages/index.js
+import React, { useState } from 'react';
+import { KeplrConnectButton } from '../components/KeplrConnectButton';
+import UserNFTs from '../components/UserNFTs';
 
-  <main>
-    <!-- Section réservée aux détenteurs NFT permissifs -->
-    <section id="governanceSection" style="display:none;">
-      <h2>Zone Gouvernance</h2>
-      <button id="btnCreateVK">Créer une Viewing Key</button>
+const HomePage = () => {
+  const [userAddress, setUserAddress] = useState(null);
 
-      <div class="proposal-form">
-        <h3>Nouvelle Proposition</h3>
-        <input type="text" id="title" placeholder="Titre" />
-        <textarea id="summary" placeholder="Résumé"></textarea>
-        <input type="number" id="amount" placeholder="Montant demandé" />
-        <button id="btnSubmitProposal">Soumettre</button>
-      </div>
-
-      <div class="tabs">
-        <div class="tab active" data-tab="active">Propositions Actives</div>
-        <div class="tab" data-tab="history">Historique</div>
-      </div>
-
-      <div id="propsActive">
-        <h3>Propositions en cours</h3>
-        <div id="proposalsList"></div>
-      </div>
-
-      <div id="propsHistory" class="hidden">
-        <h3>Historique des propositions</h3>
-        <div id="historyList"></div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ⚡️ Config inline -->
-  <script>
-  window.DAO_GOVERNANCE = {
-    votingPeriodDays: 14,
-    quorumPct: 40,
-    passPct: 50,
-    vetoPct: 33.4
+  const handleAddressUpdate = (address) => {
+    setUserAddress(address);
   };
-  window.DAO_COLLECTIONS = [
-    { name: "Collection A", contract: "secret1xxxxx" },
-    { name: "Collection B", contract: "secret1yyyyy" }
-  ];
-  window.DAO_MEMBERS = [
-    { address: "secret1adminxxxxxx", role: "admin" }
-  ];
-  </script>
 
-  <script src="app.js"></script>
-</body>
-</html>
+  return (
+    <div className="min-h-screen bg-gray-900 text-white">
+      <header className="text-center py-12">
+        <h1 className="text-4xl font-bold mb-4">Bienvenue sur la plateforme de gouvernance</h1>
+        <p className="text-lg mb-8">Connectez-vous via Keplr pour accéder à vos privilèges exclusifs</p>
+        {userAddress ? (
+          <UserNFTs userAddress={userAddress} />
+        ) : (
+          <KeplrConnectButton onAddressUpdate={handleAddressUpdate} />
+        )}
+      </header>
+    </div>
+  );
+};
+
+export default HomePage;
