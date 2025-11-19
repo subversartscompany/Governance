@@ -1,5 +1,5 @@
 
-// /src/app.js
+
 import React, { useState } from 'react';
 import { KeplrConnectButton } from './components/KeplrConnectButton';
 import UserNFTs from './components/UserNFTs';
