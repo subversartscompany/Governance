@@ -1,8 +1,13 @@
-{
-  "collections": [
-    {
-      "name": "SubversArts NFT Permissif",
-      "contract": "secret1xxxxxx..." 
-    }
-  ]
-}
+
+[
+  {
+    "id": "VIP",
+    "name": "VIP NFT",
+    "privileges": ["Accès aux fonctionnalités premium", "Accès aux événements exclusifs"]
+  },
+  {
+    "id": "BASIC",
+    "name": "Basic NFT",
+    "privileges": ["Accès aux fonctionnalités standard"]
+  }
+]
