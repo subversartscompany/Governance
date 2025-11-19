@@ -4,3 +4,12 @@
   "passPct": 0.5,
   "vetoPct": 0.334
 }
+{
+  "governanceModel": "DAO",
+  "votingPower": "NFT-based",
+  "decisions": [
+    "Proposition de nouvelles fonctionnalités",
+    "Gestion des fonds"
+  ]
+}
+
