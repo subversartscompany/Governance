@@ -1,0 +1,17 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-900 text-white font-sans;
+}
+
+h1, h2, h3 {
+  @apply font-bold;
+}
+
+button {
+  @apply px-6 py-2 bg-blue-500 rounded-full text-white;
+}
+
